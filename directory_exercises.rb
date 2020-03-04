@@ -7,7 +7,8 @@ end
 def print(students)
   i = 0
   until i == students.length
-    puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)."
+    output = "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort) is #{students[i][:age].to_s} years old and enjoys #{students[i][:hobby]}"
+    puts output.center(80)
     i += 1
   end
 end
@@ -75,31 +76,8 @@ def students_by_cohort(students)
     end
   end
 end
-
-def interactive_menu
-  students = []
-  loop do
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit"
-    selection = gets.chomp
-    case selection 
-      when "1"
-        students = input_students
-      when "2"
-        if students.count > 0
-          print_header
-          print(students)
-          print_footer(students)
-        else
-          print_footer(students)
-        end
-      when "9"
-        exit
-      else
-        puts "Try again"
-    end
-  end
-end
-
-interactive_menu
+# Call methods
+students = input_students
+print_header
+print(students)
+print_footer(students)
