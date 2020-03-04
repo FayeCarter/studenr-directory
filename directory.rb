@@ -14,7 +14,11 @@ def print(students)
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+  if names.count > 1
+    puts "Overall, we have #{names.count} great students"
+  else
+    puts "Overall, we have #{names.count} great student"
+  end
 end
 
 def input_students
@@ -33,7 +37,11 @@ def input_students
     hobby = gets.chomp
     hobby = "N/A" if hobby.empty?
     students << {name: name, cohort: cohort, hobby: hobby, age: age}
-    puts "Now we have #{students.count} students"
+    if students.length > 1
+      puts "Now we have #{students.count} students"
+    else
+      puts "Now we have #{students.count} student"
+    end
     # get another name from the user
     name = gets.chomp
   end
