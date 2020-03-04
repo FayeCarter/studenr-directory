@@ -59,8 +59,18 @@ def short_names(students)
   end   
 end 
 
+def students_by_cohort(students)
+  puts "Pick a cohort"
+  choice = gets.chomp
+  students.map do |student|
+    if student[:cohort] == choice.to_sym
+      puts student[:name]
+    end
+  end
+end
 # Call methods
 students = input_students
 print_header
 print(students)
 print_footer(students)
+students_by_cohort(students)
