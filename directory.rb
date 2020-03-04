@@ -38,9 +38,16 @@ def print_starts_with(students)
     end
   end
 end
+def short_names(students)
+  students.each do | student |
+    if student[:name].length < 12
+      puts student[:name]
+    end
+  end   
+end 
 # Call methods
 students = input_students
 print_header
 print(students)
 print_footer(students)
-print_starts_with_B(students)
+short_names(students)
