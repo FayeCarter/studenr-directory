@@ -7,7 +7,8 @@ end
 def print(students)
   i = 0
   until i == students.length
-    puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort) is #{students[i][:age].to_s} years old and enjoys #{students[i][:hobby]}"
+    output = "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort) is #{students[i][:age].to_s} years old and enjoys #{students[i][:hobby]}"
+    puts output.center(80)
     i += 1
   end
 end
