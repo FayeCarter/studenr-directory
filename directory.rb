@@ -25,7 +25,7 @@ def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   students = []
-  name = gets.chomp
+  name = gets.delete("\n")
   while !name.empty? do
     puts "what cohort is #{name}?"
     cohort = gets.chomp.to_sym
@@ -81,4 +81,3 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
-students_by_cohort(students)
