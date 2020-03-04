@@ -29,8 +29,18 @@ def input_students
   #return the array of students
   students
 end
+def print_starts_with(students)
+  puts "Pick a letter"
+  letter = gets.chomp
+  students.each do | student |
+    if student[:name][0].downcase == letter.downcase
+      puts student[:name]
+    end
+  end
+end
 # Call methods
 students = input_students
 print_header
 print(students)
 print_footer(students)
+print_starts_with_B(students)
