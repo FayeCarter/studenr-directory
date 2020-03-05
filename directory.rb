@@ -1,6 +1,10 @@
 require 'csv'
 @students = []
 
+def create_student(name, cohort)
+  @students << {name: name, cohort: cohort.to_sym}
+end
+
 def print_header
   puts "The students of Villains Academy"
   puts "-------------"
@@ -20,10 +24,6 @@ def student_count
   end
 end
 
-def create_student(name, cohort)
-  @students << {name: name, cohort: cohort.to_sym}
-end
-
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
@@ -38,13 +38,6 @@ def input_students
   end
 end
 
-def load_students(file = 'students.csv')
-  CSV.foreach(file) do |row|
-    name, cohort = row
-    create_student(name, cohort)
-  end
-end
-
 def print_starts_with(students)
   puts "Pick a letter"
   letter = gets.chomp
@@ -55,21 +48,18 @@ def print_starts_with(students)
   end
 end
 
-def short_names(students)
-  students.each do | student |
-    if student[:name].length < 12
-      puts student[:name]
+def save_students(filename = 'students.csv')
+  CSV.open(filename, "w") do |file|
+    @students.each do |student|
+      file << [student[:name], student[:cohort]]
     end
-  end   
-end 
+  end
+end
 
-def students_by_cohort(students)
-  puts "Pick a cohort"
-  choice = gets.chomp
-  students.map do |student|
-    if student[:cohort] == choice.to_sym
-      puts student[:name]
-    end
+def load_students(file = 'students.csv')
+  CSV.foreach(file) do |row|
+    name, cohort = row
+    create_student(name, cohort)
   end
 end
 
@@ -79,16 +69,6 @@ def show_students
     student_count
 end
 
-def save_students(filename = 'students.csv')
-  CSV.open(filename, "w") do |file|
-    @students.each do |student|
-      file << [student[:name], student[:cohort]]
-    end
-  end
-end
-
-
-
 def process(selection)
   case selection
   when "1"
@@ -97,8 +77,10 @@ def process(selection)
     show_students
   when "3"
     save_students
+    puts "Students saved to file"
   when "4"
     load_students
+    puts "Students loaded from file"
   when "9"
     exit
   else
