@@ -1,3 +1,4 @@
+require 'csv'
 @students = []
 
 def print_header
@@ -41,13 +42,11 @@ def input_students
   end
 end
 
-def load_students
-  file = File.open("students.csv", "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
+def load_students(file = 'students.csv')
+  CSV.foreach(file) do |row|
+    name, cohort = row
     create_student(name, cohort)
   end
-  file.close
 end
 
 def print_starts_with(students)
