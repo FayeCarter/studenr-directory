@@ -87,14 +87,12 @@ def show_students
   end
 end
 
-def save_students
-  file = File.open("students.csv", "w")
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+def save_students(filename = 'students.csv')
+  CSV.open(filename, "w") do |file|
+    @students.each do |student|
+      file << [student[:name], student[:cohort]]
+    end
   end
-  file.close
 end
 
 
