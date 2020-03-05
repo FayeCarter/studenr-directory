@@ -19,15 +19,19 @@ def print_footer
   end
 end
 
+def create_student(name, cohort)
+  @students << {name: name, cohort: cohort.to_sym}
+end
+
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   name = gets.delete("\n")
   while !name.empty? do
     puts "what cohort is #{name}?"
-    cohort = gets.chomp.to_sym
+    cohort = gets.chomp
     cohort = :march if cohort.empty?
-    @students << {name: name, cohort: cohort}
+    create_student(name, cohort)
     if @students.length > 1
       puts "Now we have #{@students.count} students"
     else
@@ -35,6 +39,15 @@ def input_students
     end
     name = gets.chomp
   end
+end
+
+def load_students
+  file = File.open("students.csv", "r")
+  file.readlines.each do |line|
+    name, cohort = line.chomp.split(',')
+    create_student(name, cohort)
+  end
+  file.close
 end
 
 def print_starts_with(students)
@@ -85,14 +98,7 @@ def save_students
   file.close
 end
 
-def load_students
-  file = File.open("students.csv", "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
-  end
-  file.close
-end
+
 
 def process(selection)
   case selection
