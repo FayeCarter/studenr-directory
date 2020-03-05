@@ -12,7 +12,7 @@ def print_student_list
   end
 end
 
-def print_footer
+def student_count
   if @students.count > 1
     puts "Overall, we have #{@students.count} great students"
   else
@@ -33,11 +33,7 @@ def input_students
     cohort = gets.chomp
     cohort = :march if cohort.empty?
     create_student(name, cohort)
-    if @students.length > 1
-      puts "Now we have #{@students.count} students"
-    else
-      puts "Now we have #{@students.count} student"
-    end
+    student_count
     name = gets.chomp
   end
 end
@@ -78,13 +74,9 @@ def students_by_cohort(students)
 end
 
 def show_students
-  if @students.count > 0
     print_header
     print_student_list
-    print_footer
-  else
-    print_footer
-  end
+    student_count
 end
 
 def save_students(filename = 'students.csv')
