@@ -5,7 +5,14 @@ Project created for Week 4 of the Makers Academy Precourse. The student director
 ## How to use ##
 
 ```shell
+# To run the student directory
 ruby directory.rb
+
+# To run the script to view source codes
+ruby print_source_code.rb
+
+# To see exercises built around the student directory
+ruby directory_exercises.rb
 ```
 
 ## Files ##
